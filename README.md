@@ -44,3 +44,10 @@ non-integer years with `TypeError`. `Calendar.season` classifies any
 season boundaries are defined relative to that year's Easter and Advent; it
 is the caller's responsibility to pass a date that belongs to the year in
 question if that is what they want.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
